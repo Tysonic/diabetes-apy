@@ -1,6 +1,6 @@
 from flask import Flask, request, flash
 from flask_cors import CORS
-# import pandas as pd
+import pandas as pd
 import pickle
 from flask import Blueprint
 from flask_login import logout_user, login_required, login_user, current_user, UserMixin
@@ -44,16 +44,16 @@ def predictions():
         return {"result": "bad request"}
     else:
 
-        # df = pd.DataFrame(data,index=[0])
-        # df[df.columns]=df[df.columns].astype(float)
-        # if "weight" not in df.columns:
-        #     if 'height' in df.columns:
-        #         df = df.drop('height', axis=1)
-        # else:
-        #     df['bmi'] = df['weight'] / df['height']
-        #     df = df.drop(['weight', 'height'], axis=1)
-        # df = df.reindex(columns, axis=1)
-        pred = model.predict()
+        df = pd.DataFrame(data,index=[0])
+        df[df.columns]=df[df.columns].astype(float)
+        if "weight" not in df.columns:
+            if 'height' in df.columns:
+                df = df.drop('height', axis=1)
+        else:
+            df['bmi'] = df['weight'] / df['height']
+            df = df.drop(['weight', 'height'], axis=1)
+        df = df.reindex(columns, axis=1)
+        pred = model.predict(df)
         return {'result': int(pred)}
 account_blueprint = Blueprint('users', __name__, template_folder="templates")
 
