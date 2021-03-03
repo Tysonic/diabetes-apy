@@ -74,6 +74,11 @@ def register():
     return {'result':'success'}
 
 
+@app.cli.command(name='create_tables')
+def create_tables():
+    db.create_all()
+
+
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
