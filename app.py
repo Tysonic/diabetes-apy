@@ -34,6 +34,7 @@ def index():
 @app.route('/predictions', methods=["POST", 'GET'])
 def predictions():
     columns=['pregnancies', 'glucose', 'diastolic', 'triceps', 'insulin', 'bmi', 'dpf', 'age']
+    col = ["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age","Outcome"]
 
 
     with open('Notebook/pickle_model.pkl', 'rb') as file:
@@ -50,7 +51,7 @@ def predictions():
             if 'height' in df.columns:
                 df = df.drop('height', axis=1)
         else:
-            df['bmi'] = df['weight'] / df['height']
+            df['BMI'] = df['weight'] / df['height']
             df = df.drop(['weight', 'height'], axis=1)
         df = df.reindex(columns, axis=1)
         pred = model.predict(df)
