@@ -33,8 +33,8 @@ def index():
 
 @app.route('/predictions', methods=["POST", 'GET'])
 def predictions():
-    columns=['pregnancies', 'glucose', 'diastolic', 'triceps', 'insulin', 'bmi', 'dpf', 'age']
-    col = ["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age","Outcome"]
+    col=['pregnancies', 'glucose', 'diastolic', 'triceps', 'insulin', 'bmi', 'dpf', 'age']
+    columns = ["Pregnancies","Glucose","BloodPressure","SkinThickness","Insulin","BMI","DiabetesPedigreeFunction","Age","Outcome"]
 
 
     with open('Notebook/pickle_model.pkl', 'rb') as file:
