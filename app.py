@@ -103,6 +103,20 @@ def logout():
     logout_user()
     return {"result":"Logged out successfully"}
 
+@app.route("/forgot_password", methods=["GET", "POST"])
+def forgot_password():
+    form = request.json
+    User.query.filter_by(email=form['email']).update(dict(password=form['password']))
+    db.session.commit()
+    return {'result':'success'}
+
+@app.route("/check email", methods=['GET','POST'])
+def check_email():
+    form= request.json
+    email = User.query.filter_by(email=form['email']).first()
+    if email:
+        return {"result":'success'}
+    return {"result":"failed"}
 
 class User(db.Model, UserMixin):
     __tablename__ = "User"
